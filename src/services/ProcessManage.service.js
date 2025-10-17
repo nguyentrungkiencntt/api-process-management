@@ -1,12 +1,11 @@
 const db = require("../models");
 const v4 = require("../utils/common");
 
+const KEY_COIN = 'S2LBG4AYEB8MV';
 class ProcessManageService {
 
     async createTopic({ title }) {
         return new Promise(async (relsove, reject) => {
-
-            console.log(title)
             try {
                 const responsive = await db.Topic.findOrCreate({
                     where: { title },
@@ -16,6 +15,17 @@ class ProcessManageService {
                         isDelete: false
                     }
                 })
+
+                const coin = await db.Coin.findOne({
+                    where: { code: KEY_COIN },
+                    raw: true
+                })
+
+                const addCoin = 2500 + (+coin?.coin);
+
+                responsive[1] = await db.Coin.update({
+                    coin: addCoin,
+                }, { where: { code: KEY_COIN } })
 
                 return relsove({
                     error: responsive[1] ? 0 : 1,
@@ -40,6 +50,19 @@ class ProcessManageService {
                         isCompleted: false
                     }
                 })
+
+                const coin = await db.Coin.findOne({
+                    where: { code: KEY_COIN },
+                    raw: true
+                })
+
+                const addCoin = (+coin?.coin) - 3000;
+
+                responsive[1] = await db.Coin.update({
+                    coin: addCoin,
+                }, { where: { code: KEY_COIN } })
+
+
 
                 return relsove({
                     error: responsive[1] ? 0 : 1,
@@ -118,6 +141,18 @@ class ProcessManageService {
                     where: { code: id }
                 })
 
+                const coin = await db.Coin.findOne({
+                    where: { code: KEY_COIN },
+                    raw: true
+                })
+
+                const addCoin = (+coin?.coin) - 3000;
+
+                responsive[1] = await db.Coin.update({
+                    coin: addCoin,
+                }, { where: { code: KEY_COIN } })
+
+
                 return relsove({
                     error: responsive ? 0 : 1,
                     message: responsive ? "Câp nhật dư liệu thành công." : "Cập nhât dư liệu không thành công."
@@ -136,6 +171,19 @@ class ProcessManageService {
                 }, {
                     where: { code: id }
                 })
+
+                const coin = await db.Coin.findOne({
+                    where: { code: KEY_COIN },
+                    raw: true
+                })
+
+                const addCoin = (+coin?.coin) - 10000;
+
+                responsive[1] = await db.Coin.update({
+                    coin: addCoin,
+                }, { where: { code: KEY_COIN } })
+
+
                 return relsove({
                     error: responsive ? 0 : 1,
                     message: responsive ? "Update success!" : "Update fail!"
@@ -193,12 +241,43 @@ class ProcessManageService {
         })
     }
 
+    async getCoin() {
+        return new Promise(async (relsove, reject) => {
+            try {
+                const coinDB = await db.Coin.findOne({
+                    where:{code:KEY_COIN},
+                    raw:true,
+                    attributes:["coin","code"]
+                });
+                return relsove({
+                    error: coinDB ? 0 : 1,
+                    message: coinDB ? "Get Coin success!" : "Get Coin Fail!",
+                    data:coinDB
+                })
+            } catch (error) {
+                reject(error);
+            }
+        })
+    }
+
     async delete(id) {
         return new Promise(async (relsove, reject) => {
             try {
                 const responsive = await db.Process.destroy({
                     where: { code: id }
                 })
+
+                const coin = await db.Coin.findOne({
+                    where: { code: KEY_COIN },
+                    raw: true
+                })
+
+                const addCoin = (+coin?.coin) + 10000;
+
+                responsive[1] = await db.Coin.update({
+                    coin: addCoin,
+                }, { where: { code: KEY_COIN } })
+
 
                 return relsove({
                     error: responsive ? 0 : 1,

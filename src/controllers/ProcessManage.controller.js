@@ -103,6 +103,19 @@ class ProcessManageController {
         }
     }
 
+    async getCoin(req, res) {
+        try {
+
+            const responsive = await services.getCoin();
+            return res.status(200).json(responsive);
+        } catch (error) {
+            return res.status(500).json({
+                error: -1,
+                message: "Interal Server Error"
+            })
+        }
+    }
+
     async getAllTopic(req, res) {
         try {
             const responsive = await services.getAllTopic();
