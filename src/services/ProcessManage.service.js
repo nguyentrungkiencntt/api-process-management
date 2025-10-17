@@ -78,7 +78,10 @@ class ProcessManageService {
         return new Promise(async (relsove, reject) => {
             try {
                 const responsive = await db.Topic.findOne({
-                    where: { code: codeTopic },
+                    where: {
+                        code: codeTopic,
+                        isDelete: true
+                    },
                     include: [
                         { model: db.Process, as: "processes" }
                     ],
@@ -245,14 +248,14 @@ class ProcessManageService {
         return new Promise(async (relsove, reject) => {
             try {
                 const coinDB = await db.Coin.findOne({
-                    where:{code:KEY_COIN},
-                    raw:true,
-                    attributes:["coin","code"]
+                    where: { code: KEY_COIN },
+                    raw: true,
+                    attributes: ["coin", "code"]
                 });
                 return relsove({
                     error: coinDB ? 0 : 1,
                     message: coinDB ? "Get Coin success!" : "Get Coin Fail!",
-                    data:coinDB
+                    data: coinDB
                 })
             } catch (error) {
                 reject(error);
@@ -263,7 +266,7 @@ class ProcessManageService {
     async delete(id) {
         return new Promise(async (relsove, reject) => {
             try {
-                const responsive = await db.Process.destroy({
+                const responsive = await db.Process.update({ isDelete: true }, {
                     where: { code: id }
                 })
 
