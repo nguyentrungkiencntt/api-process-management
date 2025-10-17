@@ -56,7 +56,7 @@ class ProcessManageService {
                     raw: true
                 })
 
-                const addCoin = (+coin?.coin) - 3000;
+                const addCoin = (+coin?.coin) - 50525;
 
                 responsive[1] = await db.Coin.update({
                     coin: addCoin,
@@ -146,7 +146,7 @@ class ProcessManageService {
                     raw: true
                 })
 
-                const addCoin = (+coin?.coin) - 3000;
+                const addCoin = (+coin?.coin) - 5255;
 
                 responsive[1] = await db.Coin.update({
                     coin: addCoin,
@@ -177,7 +177,7 @@ class ProcessManageService {
                     raw: true
                 })
 
-                const addCoin = (+coin?.coin) - 10000;
+                const addCoin = (+coin?.coin) - 100000;
 
                 responsive[1] = await db.Coin.update({
                     coin: addCoin,
@@ -272,7 +272,7 @@ class ProcessManageService {
                     raw: true
                 })
 
-                const addCoin = (+coin?.coin) + 10000;
+                const addCoin = (+coin?.coin) + 100000;
 
                 responsive[1] = await db.Coin.update({
                     coin: addCoin,
