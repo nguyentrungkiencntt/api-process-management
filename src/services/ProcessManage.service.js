@@ -79,11 +79,14 @@ class ProcessManageService {
             try {
                 const responsive = await db.Topic.findOne({
                     where: {
-                        code: codeTopic,
-                        isDelete: false
+                        code: codeTopic
                     },
                     include: [
-                        { model: db.Process, as: "processes" }
+                        {
+                            model: db.Process, as: "processes",
+                            where: { isDelete: false },
+                            required: false
+                        }
                     ],
                     nest: true
                 })
