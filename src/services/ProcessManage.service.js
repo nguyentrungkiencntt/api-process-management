@@ -217,10 +217,10 @@ class ProcessManageService {
         })
     }
 
-    async countNoCompleted() {
+    async countNoCompleted(id) {
         return new Promise(async (relsove, reject) => {
             try {
-                const { count } = await db.Process.findAndCountAll({ where: { isCompleted: false } });
+                const { count } = await db.Process.findAndCountAll({ where: { isCompleted: false,codeTopic:id } });
                 return relsove({
                     error: 0,
                     message: "Count success!",
@@ -232,10 +232,12 @@ class ProcessManageService {
         })
     }
 
-    async count() {
+    async count(id) {
         return new Promise(async (relsove, reject) => {
             try {
-                const count = await db.Process.count();
+                const count = await db.Process.count({
+                    where:{codeTopic:id}
+                });
                 return relsove({
                     error: 0,
                     message: "Count success!",

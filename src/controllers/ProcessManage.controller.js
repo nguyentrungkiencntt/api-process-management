@@ -54,7 +54,7 @@ class ProcessManageController {
 
     async countCompleted(req, res) {
         try {
-            const {id} = req.params;
+            const { id } = req.params;
             const responsive = await services.countCompleted(id);
             return res.status(200).json(responsive);
         } catch (error) {
@@ -67,7 +67,8 @@ class ProcessManageController {
 
     async countNoCompleted(req, res) {
         try {
-            const responsive = await services.countNoCompleted();
+            const { id } = req.params;
+            const responsive = await services.countNoCompleted(id);
             return res.status(200).json(responsive);
         } catch (error) {
             return res.status(500).json({
@@ -79,7 +80,8 @@ class ProcessManageController {
 
     async count(req, res) {
         try {
-            const responsive = await services.count();
+            const { id } = req.params;
+            const responsive = await services.count(id);
             return res.status(200).json(responsive);
         } catch (error) {
             return res.status(500).json({

@@ -10,10 +10,10 @@ class ProcessManageRouter {
         router.get('/all/:id', ProcessManageControllers.getAll);
         router.get('/one/:id', ProcessManageControllers.getOne);
         router.get('/countCompleted/:id', ProcessManageControllers.countCompleted);
+        router.get('/countNoCompleted/:id', ProcessManageControllers.countNoCompleted);
+        router.get('/count/:id', ProcessManageControllers.count);
         router.get('/all', ProcessManageControllers.getAllTopic);
         router.get('/coin', ProcessManageControllers.getCoin);
-        router.get('/countNoCompleted', ProcessManageControllers.countNoCompleted);
-        router.get('/count', ProcessManageControllers.count);
         router.post('/createTopic', ProcessManageControllers.createTopic);
         router.post('/create', ProcessManageControllers.create);
         return router;
