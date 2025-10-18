@@ -9,9 +9,9 @@ class ProcessManageRouter {
         router.put('/updateCompleted/:id', ProcessManageControllers.updateCompleted);
         router.get('/all/:id', ProcessManageControllers.getAll);
         router.get('/one/:id', ProcessManageControllers.getOne);
+        router.get('/countCompleted/:id', ProcessManageControllers.countCompleted);
         router.get('/all', ProcessManageControllers.getAllTopic);
         router.get('/coin', ProcessManageControllers.getCoin);
-        router.get('/countCompleted', ProcessManageControllers.countCompleted);
         router.get('/countNoCompleted', ProcessManageControllers.countNoCompleted);
         router.get('/count', ProcessManageControllers.count);
         router.post('/createTopic', ProcessManageControllers.createTopic);

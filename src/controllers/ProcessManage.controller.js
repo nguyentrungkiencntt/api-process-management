@@ -54,7 +54,8 @@ class ProcessManageController {
 
     async countCompleted(req, res) {
         try {
-            const responsive = await services.countCompleted();
+            const {id} = req.params;
+            const responsive = await services.countCompleted(id);
             return res.status(200).json(responsive);
         } catch (error) {
             return res.status(500).json({

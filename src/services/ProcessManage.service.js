@@ -200,11 +200,11 @@ class ProcessManageService {
         })
     }
 
-    async countCompleted() {
+    async countCompleted(id) {
         return new Promise(async (relsove, reject) => {
             try {
                 const { count } = await db.Process.findAndCountAll({
-                    where: { isCompleted: true }
+                    where: { isCompleted: true, codeTopic: id }
                 })
                 return relsove({
                     error: 0,
